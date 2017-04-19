@@ -1,6 +1,6 @@
 {
-    "name": "vehicle-make",
-    "description": "vehicle-make",
+    "name": "model-vehicle-models",
+    "description": "model-vehicle-models",
     "version": "0.0.0",
     "author": {
         "name": "serandives",
@@ -12,6 +12,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/serandules/vehicle-make.git"
+        "url": "git://github.com/serandules/model-vehicle-models.git"
     }
 }
