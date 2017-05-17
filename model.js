@@ -2,11 +2,24 @@ var log = require('logger')('vehicle-model');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var types = require('validators').types;
+
 var model = Schema({
-    title: String,
-    make: {type: Schema.Types.ObjectId, ref: 'VehicleMake'},
     has: {type: Object, default: {}},
-    allowed: {type: Object, default: {}}
+    allowed: {type: Object, default: {}},
+    title: {
+        type: String,
+        required: true,
+        validator: types.title({
+            length: 100
+        })
+    },
+    make: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+        ref: 'vehicle-makes',
+        validator: types.ref()
+    }
 }, {collection: 'vehicle-models'});
 
 model.set('toJSON', {
@@ -21,4 +34,4 @@ model.virtual('id').get(function () {
     return this._id;
 });
 
-module.exports = mongoose.model('VehicleModel', model);
+module.exports = mongoose.model('vehicle-models', model);
