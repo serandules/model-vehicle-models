@@ -1,4 +1,4 @@
-var log = require('logger')('vehicle-model');
+var log = require('logger')('model-vehicle-models');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -15,7 +15,7 @@ var model = Schema({
         })
     },
     make: {
-        type: [Schema.Types.ObjectId],
+        type: Schema.Types.ObjectId,
         required: true,
         ref: 'vehicle-makes',
         validator: types.ref()
@@ -27,6 +27,7 @@ model.set('toJSON', {
     //virtuals: false,
     transform: function (doc, ret, options) {
         delete ret._id;
+        delete ret.__v;
     }
 });
 
