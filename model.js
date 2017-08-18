@@ -26,17 +26,4 @@ model.plugin(mongins.user);
 model.plugin(mongins.createdAt);
 model.plugin(mongins.updatedAt);
 
-model.set('toJSON', {
-    getters: true,
-    //virtuals: false,
-    transform: function (doc, ret, options) {
-        delete ret._id;
-        delete ret.__v;
-    }
-});
-
-model.virtual('id').get(function () {
-    return this._id;
-});
-
 module.exports = mongoose.model('vehicle-models', model);
