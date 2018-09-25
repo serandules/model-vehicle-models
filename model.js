@@ -23,7 +23,7 @@ var model = Schema({
 
 model.plugin(mongins);
 model.plugin(mongins.user);
-model.plugin(mongins.createdAt);
-model.plugin(mongins.updatedAt);
+model.plugin(mongins.createdAt());
+model.plugin(mongins.updatedAt());
 
 module.exports = mongoose.model('vehicle-models', model);
