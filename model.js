@@ -23,7 +23,7 @@ var model = Schema({
     }
 }, {collection: 'vehicle-models'});
 
-model.plugin(mongins);
+model.plugin(mongins());
 model.plugin(mongins.user);
 model.plugin(mongins.createdAt());
 model.plugin(mongins.updatedAt());
