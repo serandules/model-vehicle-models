@@ -2,11 +2,13 @@ var log = require('logger')('model-vehicle-models');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var mongutils = require('mongutils');
 var mongins = require('mongins');
-var types = require('validators').types;
+var validators = require('validators');
+var model = require('model');
 
-var model = Schema({
+var types = validators.types;
+
+var vmodel = Schema({
     title: {
         type: String,
         required: true,
@@ -23,13 +25,13 @@ var model = Schema({
     }
 }, {collection: 'vehicle-models'});
 
-model.plugin(mongins());
-model.plugin(mongins.user);
-model.plugin(mongins.createdAt());
-model.plugin(mongins.updatedAt());
+vmodel.plugin(mongins());
+vmodel.plugin(mongins.user);
+vmodel.plugin(mongins.createdAt());
+vmodel.plugin(mongins.updatedAt());
 
-mongutils.ensureIndexes(model, [
+model.ensureIndexes(vmodel, [
   {createdAt: -1, _id: -1}
 ]);
 
-module.exports = mongoose.model('vehicle-models', model);
+module.exports = mongoose.model('vehicle-models', vmodel);
