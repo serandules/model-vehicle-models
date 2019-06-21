@@ -8,7 +8,7 @@ var model = require('model');
 
 var types = validators.types;
 
-var vmodel = Schema({
+var schema = Schema({
     title: {
         type: String,
         required: true,
@@ -25,13 +25,22 @@ var vmodel = Schema({
     }
 }, {collection: 'vehicle-models'});
 
-vmodel.plugin(mongins());
-vmodel.plugin(mongins.user);
-vmodel.plugin(mongins.createdAt());
-vmodel.plugin(mongins.updatedAt());
+schema.plugin(mongins());
+schema.plugin(mongins.user);
+schema.plugin(mongins.permissions({
+    workflow: 'model'
+}));
+schema.plugin(mongins.status({
+    workflow: 'model'
+}));
+schema.plugin(mongins.visibility({
+    workflow: 'model'
+}));
+schema.plugin(mongins.createdAt());
+schema.plugin(mongins.updatedAt());
 
-model.ensureIndexes(vmodel, [
+model.ensureIndexes(schema, [
   {createdAt: -1, _id: -1}
 ]);
 
-module.exports = mongoose.model('vehicle-models', vmodel);
+module.exports = mongoose.model('vehicle-models', schema);
